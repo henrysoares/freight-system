@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor(onConstructor_ = @Autowired)
 @RestController
-@RequestMapping("/api/user/requester")
+@RequestMapping("/api/user")
 public class CustomerRequesterResource {
 
   CustomerService customerService;
@@ -29,10 +29,26 @@ public class CustomerRequesterResource {
    * @param request
    * @return Status 201 caso o usuario seja criado com sucesso.
    */
-  @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(path = "/requester", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Object> createCustomerRequester(
       @Valid @RequestBody @NonNull CustomerCreationRequest request) {
-    customerService.saveCustomer(request.toEntity(CustomerType.REQUESTER));
+    customerService.saveCustomerRequester(request.toEntity(CustomerType.REQUESTER));
+
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
+  /**
+   * Metodo para criação de ususarios do tipo DRIVER.
+   *
+   * @param request
+   * @return Status 201 caso o usuario seja criado com sucesso.
+   */
+  @PostMapping(path = "/driver", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Object> createCustomerDriver(
+      @Valid @RequestBody @NonNull DriverCreationRequest request) {
+    final var vehicleDetails = request.getVehicleDetails();
+
+    customerService.saveCustomerDriver(request.toEntity(CustomerType.DRIVER), vehicleDetails);
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }

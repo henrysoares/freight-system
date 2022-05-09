@@ -1,12 +1,14 @@
 package com.hencarvalho.freightsystem.application.services.filter;
 
 import static com.hencarvalho.freightsystem.infrastructure.util.JWTUtils.LOGIN_PATH;
+import static com.hencarvalho.freightsystem.infrastructure.util.JWTUtils.ROLE_FIELD_NAME;
+import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +27,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @AllArgsConstructor(onConstructor_ = @Autowired)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerAuthorizationFilter extends OncePerRequestFilter {
-
-  Algorithm alg;
-
   JWTVerifier jwtVerifier;
 
   @Override
@@ -43,24 +42,25 @@ public class CustomerAuthorizationFilter extends OncePerRequestFilter {
         try {
           final var token = authorizationHeader.substring("Bearer ".length());
 
-          var decoded = jwtVerifier.verify(token);
+          var data = jwtVerifier.verify(token);
 
-          var email = decoded.getSubject();
+          var email = data.getSubject();
+          final var roles = data.getClaim(ROLE_FIELD_NAME).asArray(String.class);
 
-          final var roles =
-              List.of(new SimpleGrantedAuthority(decoded.getClaim("ROLE").asString()));
-          final UsernamePasswordAuthenticationToken authenticationToken =
-              new UsernamePasswordAuthenticationToken(email, null, roles);
+          Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+          stream(roles).forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
+
+          UsernamePasswordAuthenticationToken authenticationToken =
+              new UsernamePasswordAuthenticationToken(email, null, authorities);
 
           SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-          filterChain.doFilter(request, response);
         } catch (Exception exception) {
           log.error("was not possible to authorize the user", exception);
         }
-      } else {
-        filterChain.doFilter(request, response);
       }
+      filterChain.doFilter(request, response);
     }
   }
 }

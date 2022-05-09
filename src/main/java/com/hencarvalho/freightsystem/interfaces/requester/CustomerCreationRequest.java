@@ -34,17 +34,20 @@ public class CustomerCreationRequest implements Serializable {
 
   @NotNull String password;
 
+  @NotNull String phone;
+
   @NotNull
   @Size(min = 12, max = 12)
   String document;
 
-  @Valid AddressCreationRequest address;
+  @NotNull @Valid AddressCreationRequest address;
 
   public Customer toEntity(@NonNull final CustomerType type) {
     return Customer.builder()
         .name(name)
         .document(document)
         .type(type)
+        .phone(phone)
         .email(email)
         .password(password)
         .address(address.toEntity())

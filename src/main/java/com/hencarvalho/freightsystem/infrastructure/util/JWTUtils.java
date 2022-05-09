@@ -10,8 +10,9 @@ import org.springframework.context.annotation.Configuration;
 public class JWTUtils {
 
   /** 300 minutos para a expiração do token. */
-  public static final int TOKEN_EXPIRATION = 300 * 60 * 1000;
+  public static final String ROLE_FIELD_NAME = "ROLE";
 
+  public static final int TOKEN_EXPIRATION = 300 * 60 * 1000;
   public static final int TOKEN_REFRESH = 350 * 60 * 1000;
   public static final String SECRET = "1fbb47ce-9bd7-4a40-9178-90a8d8ad46a5";
   public static final String LOGIN_PATH = "/login";

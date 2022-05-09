@@ -46,6 +46,9 @@ public class Customer {
   @Column(name = "CUSTOMER_NAME", nullable = false)
   String name;
 
+  @Column(name = "CUSTOMER_PHONE", nullable = false, unique = true)
+  String phone;
+
   @Email
   @Column(name = "CUSTOMER_EMAIL", nullable = false, unique = true)
   String email;

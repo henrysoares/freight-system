@@ -9,6 +9,7 @@ import com.hencarvalho.freightsystem.infrastructure.util.JWTUtils;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -88,7 +90,11 @@ public class CustomerAuthenticationFilter extends UsernamePasswordAuthentication
         .withSubject(user.getUsername())
         .withExpiresAt(new Date(System.currentTimeMillis() + JWTUtils.TOKEN_EXPIRATION))
         .withIssuer(request.getRequestURL().toString())
-        .withClaim("ROLE", user.getAuthorities().toString())
+        .withClaim(
+            JWTUtils.ROLE_FIELD_NAME,
+            user.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()))
         .sign(alg);
   }
 
