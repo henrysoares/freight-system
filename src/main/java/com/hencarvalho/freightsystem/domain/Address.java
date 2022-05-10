@@ -13,13 +13,15 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 /** Entidade que representa os dados de um endereço. */
 @Getter
 @Builder
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
 @Entity
 @Table(name = "ADDRESS")
 public class Address {
@@ -44,7 +46,7 @@ public class Address {
   String city;
 
   @Column(name = "ADDRESS_CODE", nullable = false, length = 10)
-  String CEP;
+  String cep;
 
   @Column(name = "DAT_CREATION")
   ZonedDateTime creationDate;

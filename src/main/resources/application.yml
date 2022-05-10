@@ -6,5 +6,5 @@ spring:
     password: postgres
   flyway:
     enabled: true
-
-
+  jpa:
+    show-sql: true
