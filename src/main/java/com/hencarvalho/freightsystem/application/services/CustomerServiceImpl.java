@@ -5,10 +5,12 @@ import com.hencarvalho.freightsystem.application.services.assembler.CustomerAsse
 import com.hencarvalho.freightsystem.application.services.exceptions.CustomerCreationException;
 import com.hencarvalho.freightsystem.application.services.exceptions.CustomerNotFoundException;
 import com.hencarvalho.freightsystem.domain.Customer;
+import com.hencarvalho.freightsystem.domain.VehicleDetails;
 import com.hencarvalho.freightsystem.domain.repositories.CustomerRepository;
 import com.hencarvalho.freightsystem.domain.repositories.VehicleDetailsRepository;
-import com.hencarvalho.freightsystem.interfaces.requester.CustomerDTO;
 import com.hencarvalho.freightsystem.interfaces.requester.VehicleDetailsCreationRequest;
+import com.hencarvalho.freightsystem.interfaces.requester.dto.CustomerDTO;
+import com.hencarvalho.freightsystem.interfaces.requester.dto.VehicleDTO;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -85,7 +87,11 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
   public CustomerDTO getLoggedUserInformation(@NonNull String token) {
     final var details = jwtVerifier.verify(token.substring("Bearer ".length()));
     var email = details.getSubject();
-    return customerAssemblers.assembleDTO(customerRepository.findByEmail(email).get());
+
+    final var vehicleDetails = getVehicleDetails(email);
+
+    return customerAssemblers.assembleDTO(
+        customerRepository.findByEmail(email).get(), vehicleDetails);
   }
 
   @Override
@@ -98,6 +104,15 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
   public Customer getCustomerByEmail(@NonNull String email) {
     final var customer = customerRepository.findByEmail(email);
     return getCustomer(customer);
+  }
+
+  @Override
+  public void deleteByEmail(@NonNull String token) {
+    final var details = jwtVerifier.verify(token.substring("Bearer ".length()));
+    var email = details.getSubject();
+
+    final var customer = getCustomerByEmail(email);
+    customerRepository.delete(customer);
   }
 
   @Override
@@ -117,5 +132,15 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     }
 
     return customer.get();
+  }
+
+  private VehicleDTO getVehicleDetails(@NonNull final String email) {
+    final var vehicleDetails = vehicleDetailsRepository.findVehicleByCustomerEmail(email);
+
+    if (vehicleDetails.isEmpty()) {
+      return customerAssemblers.assembleVehicleDTO(new VehicleDetails());
+    }
+
+    return customerAssemblers.assembleVehicleDTO(vehicleDetails.get());
   }
 }

@@ -1,5 +1,6 @@
-package com.hencarvalho.freightsystem.interfaces.requester;
+package com.hencarvalho.freightsystem.interfaces.requester.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hencarvalho.freightsystem.infrastructure.util.CustomerScore;
 import java.io.Serializable;
@@ -7,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 @Value
 @AllArgsConstructor
@@ -26,4 +28,7 @@ public class CustomerDTO implements Serializable {
 
   @JsonProperty("address")
   AddressDTO addressDTO;
+
+  @JsonProperty("vehicleDetails")
+  VehicleDTO vehicleDTO;
 }

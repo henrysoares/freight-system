@@ -1,4 +1,4 @@
-package com.hencarvalho.freightsystem.interfaces.requester;
+package com.hencarvalho.freightsystem.interfaces.requester.dto;
 
 import java.io.Serializable;
 import lombok.AllArgsConstructor;

@@ -42,6 +42,9 @@ public class Customer {
   @Column(name = "CUSTOMER_ID")
   Long id;
 
+  @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
+  VehicleDetails vehicleDetails;
+
   @Size(min = 10, max = 60)
   @Column(name = "CUSTOMER_NAME", nullable = false)
   String name;
