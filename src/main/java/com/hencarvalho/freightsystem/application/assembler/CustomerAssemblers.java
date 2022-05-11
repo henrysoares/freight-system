@@ -1,4 +1,4 @@
-package com.hencarvalho.freightsystem.application.services.assembler;
+package com.hencarvalho.freightsystem.application.assembler;
 
 import com.hencarvalho.freightsystem.domain.Address;
 import com.hencarvalho.freightsystem.domain.Customer;

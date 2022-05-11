@@ -1,9 +1,9 @@
-package com.hencarvalho.freightsystem.infrastructure.config;
+package com.hencarvalho.freightsystem.interfaces.requester.dto.config;
 
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.hencarvalho.freightsystem.application.services.filter.CustomerAuthenticationFilter;
-import com.hencarvalho.freightsystem.application.services.filter.CustomerAuthorizationFilter;
+import com.hencarvalho.freightsystem.infrastructure.filter.CustomerAuthenticationFilter;
+import com.hencarvalho.freightsystem.infrastructure.filter.CustomerAuthorizationFilter;
 import com.hencarvalho.freightsystem.infrastructure.util.CustomerType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

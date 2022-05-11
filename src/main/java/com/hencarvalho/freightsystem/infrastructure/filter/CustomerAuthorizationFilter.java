@@ -1,4 +1,4 @@
-package com.hencarvalho.freightsystem.application.services.filter;
+package com.hencarvalho.freightsystem.infrastructure.filter;
 
 import static com.hencarvalho.freightsystem.infrastructure.util.JWTUtils.LOGIN_PATH;
 import static com.hencarvalho.freightsystem.infrastructure.util.JWTUtils.ROLE_FIELD_NAME;

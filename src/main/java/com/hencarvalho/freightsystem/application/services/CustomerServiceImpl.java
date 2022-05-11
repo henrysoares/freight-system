@@ -1,9 +1,10 @@
 package com.hencarvalho.freightsystem.application.services;
 
 import com.auth0.jwt.JWTVerifier;
-import com.hencarvalho.freightsystem.application.services.assembler.CustomerAssemblers;
-import com.hencarvalho.freightsystem.application.services.exceptions.CustomerCreationException;
-import com.hencarvalho.freightsystem.application.services.exceptions.CustomerNotFoundException;
+import com.hencarvalho.freightsystem.application.assembler.CustomerAssemblers;
+import com.hencarvalho.freightsystem.application.exceptions.CustomerCreationException;
+import com.hencarvalho.freightsystem.application.exceptions.CustomerNotFoundException;
+import com.hencarvalho.freightsystem.application.services.CustomerService;
 import com.hencarvalho.freightsystem.domain.Customer;
 import com.hencarvalho.freightsystem.domain.VehicleDetails;
 import com.hencarvalho.freightsystem.domain.repositories.CustomerRepository;
