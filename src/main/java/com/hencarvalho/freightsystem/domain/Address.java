@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
@@ -53,4 +54,10 @@ public class Address {
 
   @Column(name = "DAT_UPDATE")
   ZonedDateTime updateDate;
+
+  @PrePersist
+  void setInitialData(){
+    this.creationDate = ZonedDateTime.now();
+    this.updateDate = ZonedDateTime.now();
+  }
 }

@@ -1,8 +1,8 @@
-package com.hencarvalho.freightsystem.application.services;
+package com.hencarvalho.freightsystem.infrastructure.config.services;
 
 import com.hencarvalho.freightsystem.domain.Customer;
-import com.hencarvalho.freightsystem.interfaces.requester.VehicleDetailsCreationRequest;
-import com.hencarvalho.freightsystem.interfaces.requester.dto.CustomerDTO;
+import com.hencarvalho.freightsystem.interfaces.customer.VehicleDetailsCreationRequest;
+import com.hencarvalho.freightsystem.interfaces.customer.dto.CustomerDTO;
 import java.util.UUID;
 import lombok.NonNull;
 

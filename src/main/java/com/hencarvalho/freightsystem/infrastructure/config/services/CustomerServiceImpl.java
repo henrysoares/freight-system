@@ -1,16 +1,16 @@
-package com.hencarvalho.freightsystem.application.services;
+package com.hencarvalho.freightsystem.infrastructure.config.services;
 
 import com.auth0.jwt.JWTVerifier;
-import com.hencarvalho.freightsystem.application.services.assembler.CustomerAssemblers;
-import com.hencarvalho.freightsystem.application.services.exceptions.CustomerCreationException;
-import com.hencarvalho.freightsystem.application.services.exceptions.CustomerNotFoundException;
+import com.hencarvalho.freightsystem.infrastructure.config.services.assembler.CustomerAssemblers;
+import com.hencarvalho.freightsystem.infrastructure.config.services.exceptions.CustomerCreationException;
+import com.hencarvalho.freightsystem.infrastructure.config.services.exceptions.CustomerNotFoundException;
 import com.hencarvalho.freightsystem.domain.Customer;
 import com.hencarvalho.freightsystem.domain.VehicleDetails;
 import com.hencarvalho.freightsystem.domain.repositories.CustomerRepository;
 import com.hencarvalho.freightsystem.domain.repositories.VehicleDetailsRepository;
-import com.hencarvalho.freightsystem.interfaces.requester.VehicleDetailsCreationRequest;
-import com.hencarvalho.freightsystem.interfaces.requester.dto.CustomerDTO;
-import com.hencarvalho.freightsystem.interfaces.requester.dto.VehicleDTO;
+import com.hencarvalho.freightsystem.interfaces.customer.VehicleDetailsCreationRequest;
+import com.hencarvalho.freightsystem.interfaces.customer.dto.CustomerDTO;
+import com.hencarvalho.freightsystem.interfaces.customer.dto.VehicleDTO;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -96,7 +96,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
   @Override
   public Customer getCustomer(@NonNull UUID customerCode) {
-    final var customer = customerRepository.findByCustomerCode(customerCode);
+    final var customer = customerRepository.findByCustomerCode(customerCode.toString());
     return getCustomer(customer);
   }
 

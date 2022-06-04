@@ -1,4 +1,4 @@
-package com.hencarvalho.freightsystem.application.services.filter;
+package com.hencarvalho.freightsystem.infrastructure.config.services.filter;
 
 import static com.hencarvalho.freightsystem.infrastructure.util.JWTUtils.TOKEN_REFRESH;
 

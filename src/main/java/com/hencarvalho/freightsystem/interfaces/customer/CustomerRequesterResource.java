@@ -1,6 +1,6 @@
-package com.hencarvalho.freightsystem.interfaces.requester;
+package com.hencarvalho.freightsystem.interfaces.customer;
 
-import com.hencarvalho.freightsystem.application.services.CustomerService;
+import com.hencarvalho.freightsystem.infrastructure.config.services.CustomerService;
 import com.hencarvalho.freightsystem.infrastructure.util.CustomerType;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;

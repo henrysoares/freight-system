@@ -1,4 +1,4 @@
-package com.hencarvalho.freightsystem.interfaces.requester.dto;
+package com.hencarvalho.freightsystem.interfaces.customer.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;

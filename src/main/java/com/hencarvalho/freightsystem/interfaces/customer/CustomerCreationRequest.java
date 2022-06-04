@@ -1,4 +1,4 @@
-package com.hencarvalho.freightsystem.interfaces.requester;
+package com.hencarvalho.freightsystem.interfaces.customer;
 
 import com.hencarvalho.freightsystem.domain.Customer;
 import com.hencarvalho.freightsystem.infrastructure.util.CustomerType;

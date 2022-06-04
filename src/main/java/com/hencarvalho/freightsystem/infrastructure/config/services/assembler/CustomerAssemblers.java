@@ -1,11 +1,11 @@
-package com.hencarvalho.freightsystem.application.services.assembler;
+package com.hencarvalho.freightsystem.infrastructure.config.services.assembler;
 
 import com.hencarvalho.freightsystem.domain.Address;
 import com.hencarvalho.freightsystem.domain.Customer;
 import com.hencarvalho.freightsystem.domain.VehicleDetails;
-import com.hencarvalho.freightsystem.interfaces.requester.dto.AddressDTO;
-import com.hencarvalho.freightsystem.interfaces.requester.dto.CustomerDTO;
-import com.hencarvalho.freightsystem.interfaces.requester.dto.VehicleDTO;
+import com.hencarvalho.freightsystem.interfaces.customer.dto.AddressDTO;
+import com.hencarvalho.freightsystem.interfaces.customer.dto.CustomerDTO;
+import com.hencarvalho.freightsystem.interfaces.customer.dto.VehicleDTO;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 

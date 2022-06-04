@@ -1,4 +1,4 @@
-package com.hencarvalho.freightsystem.interfaces.requester;
+package com.hencarvalho.freightsystem.interfaces.customer;
 
 import javax.validation.Valid;
 import lombok.AccessLevel;

@@ -2,8 +2,8 @@ package com.hencarvalho.freightsystem.infrastructure.config;
 
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.hencarvalho.freightsystem.application.services.filter.CustomerAuthenticationFilter;
-import com.hencarvalho.freightsystem.application.services.filter.CustomerAuthorizationFilter;
+import com.hencarvalho.freightsystem.infrastructure.config.services.filter.CustomerAuthenticationFilter;
+import com.hencarvalho.freightsystem.infrastructure.config.services.filter.CustomerAuthorizationFilter;
 import com.hencarvalho.freightsystem.infrastructure.util.CustomerType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests()
         .antMatchers("/api/user")
         .hasAnyRole(CustomerType.DRIVER.name(), CustomerType.REQUESTER.name());
+    http.authorizeRequests().antMatchers("/api/batch/**").permitAll();
     http.authorizeRequests().antMatchers(HttpMethod.POST, "/login").permitAll();
     http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/driver").permitAll();
     http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/requester").permitAll();

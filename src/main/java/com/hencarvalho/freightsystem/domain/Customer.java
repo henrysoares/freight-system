@@ -68,7 +68,7 @@ public class Customer {
   CustomerType type;
 
   @Column(name = "CUSTOMER_CODE", nullable = false, unique = true)
-  UUID customerCode;
+  String customerCode;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "CUSTOMER_SCORE", nullable = false)
@@ -86,7 +86,7 @@ public class Customer {
 
   @PrePersist
   void setInitialData() {
-    this.customerCode = UUID.randomUUID();
+    this.customerCode = UUID.randomUUID().toString();
     this.creationDate = ZonedDateTime.now();
     this.updateDate = ZonedDateTime.now();
     this.score = CustomerScore.NONE;
